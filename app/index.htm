@@ -13,7 +13,7 @@
             function selected(f) {
                 console.log("Selecting and loading " + f + "...");
                 n = f.replace("duc_", "").replace(".db", "").replace("_", " ")
-                document.getElementById('header').innerHTML = "<h3>" + n + "</h3>";
+                // document.getElementById('header').innerHTML = "<h3>" + n + "</h3>";
                 document.getElementById('content_iframe').src = "select.cgi?db=" + f;
             }
         </script>
@@ -30,8 +30,8 @@
         </div>
         <div id=content style="float: left;">
             <div id=header>
-                <h3 style="margin-top:150px">No snapshot selected</h3>
-                <p>&larr; Please select a snapshot.</p>
+<!--                <h3 style="margin-top:150px">No snapshot selected</h3>
+                <p>&larr; Please select a snapshot.</p>-->
             </div>
             <iframe id=content_iframe>/iframe>
         </div>

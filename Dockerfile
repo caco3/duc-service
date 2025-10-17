@@ -68,10 +68,11 @@ RUN mkdir -p /scan
 COPY app/nginx.conf /etc/nginx/nginx.conf
 COPY app/ducrc /etc/ducrc
 
-COPY app/duc.cgi /var/www/html/duc.cgi
-COPY app/overview.cgi /var/www/html/overview.cgi
-COPY app/select.cgi /var/www/html/select.cgi
-COPY app/manual_scan.cgi /var/www/html/manual_scan.cgi
+COPY app/*.cgi /var/www/html/
+COPY app/*.png /var/www/html/
+COPY app/*.ico /var/www/html/
+COPY app/*.htm /var/www/html/
+COPY app/*.css /var/www/html/
 COPY app/log.cgi /var/www/html/log.cgi
 
 COPY app/startup.sh /startup.sh
