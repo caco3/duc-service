@@ -1,24 +1,28 @@
 # Duc-Service
-[![Docker Build Status](https://img.shields.io/docker/cloud/build/mkoestler/duc-service.svg)](https://hub.docker.com/r/mkoestler/duc-service/)
-[![Docker Automated build](https://img.shields.io/docker/cloud/automated/mkoestler/duc-service.svg)](https://hub.docker.com/r/mkoestler/duc-service/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/mkoestler/duc-service.svg)](https://hub.docker.com/r/mkoestler/duc-service/)
-[![Docker Image Size](https://img.shields.io/docker/image-size/mkoestler/duc-service?sort=date)](https://hub.docker.com/r/mkoestler/duc-service/)
+[![Docker Build Status](https://img.shields.io/docker/cloud/build/caco3/duc-service.svg)](https://hub.docker.com/r/caco3/duc-service/)
+[![Docker Automated build](https://img.shields.io/docker/cloud/automated/caco3/duc-service.svg)](https://hub.docker.com/r/caco3/duc-service/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/caco3/duc-service.svg)](https://hub.docker.com/r/caco3/duc-service/)
+[![Docker Image Size](https://img.shields.io/docker/image-size/caco3/duc-service?sort=date)](https://hub.docker.com/r/caco3/duc-service/)
 
 Run [Duc](https://duc.zevv.nl/) in Docker and re-index the file system using a schedule.
+The results can be viewed in a webbrowser:
 
-The built docker images can be found on [Docker Hub](https://hub.docker.com/r/mkoestler/duc-service/).
+![Screenshot](Screenshot1.png)
+
+The built docker images can be found on [Docker Hub](https://hub.docker.com/r/caco3/duc-service/).
 
 # Features
 - Included scheduling for automatic scanning
 - Single-command deployment
 - Very small image footprint
+- Web UI to view each snapshot
 
 ## Usage Example
 ```
 docker run -e "SCHEDULE=0 0 * * *" -p 80:80 \
     --mount type=bind,src=/,dst=/scan/root,readonly \
     --mount type=volume,src=duc_database,dst=/database \
-    mkoestler/duc-service
+    caco3/duc-service
 ```
 
 ## Parameters
@@ -26,7 +30,7 @@ docker run -e "SCHEDULE=0 0 * * *" -p 80:80 \
 A cron-expression that determines when an automatic scan is started.
 
 ## Web Endpoints
-- `/duc.cgi` provides a web gui to explore the disk usage
+- `/index.htm` provides a web gui to explore the disk usage snapshots
 - `/manual_scan.cgi` queues a manual scan
 - `/log.cgi` displays the log output from the last scan
 
@@ -58,6 +62,7 @@ docker run -e "SCHEDULE=0 0 * * *" -p 80:80 \
 ```
 
 ## References
+- Based on the work of https://github.com/MaximilianKoestler/duc-service
 - Duc homepage: https://duc.zevv.nl/
 
 ## Similar Projects
