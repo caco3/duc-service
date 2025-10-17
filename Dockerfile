@@ -69,6 +69,8 @@ COPY app/nginx.conf /etc/nginx/nginx.conf
 COPY app/ducrc /etc/ducrc
 
 COPY app/duc.cgi /var/www/html/duc.cgi
+COPY app/overview.cgi /var/www/html/overview.cgi
+COPY app/select.cgi /var/www/html/select.cgi
 COPY app/manual_scan.cgi /var/www/html/manual_scan.cgi
 COPY app/log.cgi /var/www/html/log.cgi
 
