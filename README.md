@@ -22,7 +22,7 @@ The built docker images can be found on [Docker Hub](https://hub.docker.com/r/ca
 docker run -e "SCHEDULE=0 0 * * *" -p 80:80 \
     --mount type=bind,src=/,dst=/scan/root,readonly \
     --mount type=volume,src=duc_database,dst=/database \
-    caco3/duc-service
+    caco3x/duc-service
 ```
 
 ## Parameters
