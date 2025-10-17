@@ -1,15 +1,15 @@
 # Duc-Service
-[![Docker Build Status](https://img.shields.io/docker/cloud/build/caco3/duc-service.svg)](https://hub.docker.com/r/caco3/duc-service/)
-[![Docker Automated build](https://img.shields.io/docker/cloud/automated/caco3/duc-service.svg)](https://hub.docker.com/r/caco3/duc-service/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/caco3/duc-service.svg)](https://hub.docker.com/r/caco3/duc-service/)
-[![Docker Image Size](https://img.shields.io/docker/image-size/caco3/duc-service?sort=date)](https://hub.docker.com/r/caco3/duc-service/)
+[![Docker Build Status](https://img.shields.io/docker/cloud/build/caco3x/duc-service.svg)](https://hub.docker.com/r/caco3x/duc-service/)
+[![Docker Automated build](https://img.shields.io/docker/cloud/automated/caco3x/duc-service.svg)](https://hub.docker.com/r/caco3x/duc-service/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/caco3x/duc-service.svg)](https://hub.docker.com/r/caco3x/duc-service/)
+[![Docker Image Size](https://img.shields.io/docker/image-size/caco3x/duc-service?sort=date)](https://hub.docker.com/r/caco3x/duc-service/)
 
 Run [Duc](https://duc.zevv.nl/) in Docker and re-index the file system using a schedule.
 The results can be viewed in a webbrowser:
 
 ![Screenshot](Screenshot1.png)
 
-The built docker images can be found on [Docker Hub](https://hub.docker.com/r/caco3/duc-service/).
+The built docker images can be found on [Docker Hub](https://hub.docker.com/r/caco3x/duc-service/).
 
 # Features
 - Included scheduling for automatic scanning
