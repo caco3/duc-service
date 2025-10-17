@@ -1,4 +1,4 @@
-ARG UBUNTU_VERSION=18.04
+ARG UBUNTU_VERSION=22.04
 
 ####################################
 # Temporary image for building Duc #
@@ -6,7 +6,7 @@ ARG UBUNTU_VERSION=18.04
 
 FROM ubuntu:${UBUNTU_VERSION} AS build
 
-ARG DUC_VERSION=1.4.4
+ARG DUC_VERSION=1.4.5
 
 RUN apt-get update -qq \
  && apt-get install -qq --no-install-recommends \
@@ -37,9 +37,9 @@ FROM ubuntu:${UBUNTU_VERSION}
 
 ARG BUILD_DATE
 ARG VCS_REF
-LABEL maintainer="Maximilian Köstler <maximilian@koestler.dev>" \
+LABEL maintainer="George Ruinelli <caco3@ruinelli.ch>" \
       org.label-schema.build-date=$BUILD_DATE \
-      org.label-schema.vcs-url="https://github.com/MaximilianKoestler/duc-service.git" \
+      org.label-schema.vcs-url="https://github.com/caco3/duc-service.git" \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.schema-version="1.0.0-rc1"
 
