@@ -15,6 +15,7 @@ The built docker images can be found on [Docker Hub](https://hub.docker.com/r/ca
 - Included scheduling for automatic scanning
 - Single-command deployment
 - Very small image footprint
+- Web UI to view each snapshot
 
 ## Usage Example
 ```
@@ -29,7 +30,7 @@ docker run -e "SCHEDULE=0 0 * * *" -p 80:80 \
 A cron-expression that determines when an automatic scan is started.
 
 ## Web Endpoints
-- `/duc.cgi` provides a web gui to explore the disk usage
+- `/index.htm` provides a web gui to explore the disk usage snapshots
 - `/manual_scan.cgi` queues a manual scan
 - `/log.cgi` displays the log output from the last scan
 
