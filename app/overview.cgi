@@ -5,7 +5,7 @@ echo ""
 
 cd /database
 echo "<ul>"
-for f in duc_*.db; do
+for f in `ls -c1 duc_*.db | sort`; do
     n=`echo $f | sed "s/duc_//"`
     n=`echo $n | sed "s/.db//"`
 #     n=`echo $n | sed "s/-/:/"`
