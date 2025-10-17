@@ -3,9 +3,13 @@
 echo "Content-type: text/html"
 echo ""
 
-echo "<h1>Databases</h1>\n"
-
 cd /database
+echo "<ul>"
 for f in duc_*.db; do
-    echo "<a href=select.cgi?db=$f>$f</a><br>\n"
+    n=`echo $f | sed "s/duc_//"`
+    n=`echo $n | sed "s/.db//"`
+#     n=`echo $n | sed "s/-/:/"`
+    n=`echo $n | sed "s/_/ /"`
+    echo "<li><a href=javascript:void(0) onclick=selected(\"$f\")>$n</a></li><br>\n"
 done
+echo "</ul>"
