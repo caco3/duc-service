@@ -61,6 +61,14 @@ docker run -e "SCHEDULE=0 0 * * *" -p 80:80 \
     duc-service
 ```
 
+Build, tag and publish:
+```
+docker build . --file Dockerfile --tag caco3x/duc-service:latest
+
+sudo docker login -u caco3x
+sudo docker push caco3x/duc-service:latest
+```
+
 ## References
 - Based on the work of https://github.com/MaximilianKoestler/duc-service
 - Duc homepage: https://duc.zevv.nl/
