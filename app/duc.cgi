@@ -1,3 +1,3 @@
 #! /bin/sh
 
-duc cgi
+duc cgi --dpi=150 --list
