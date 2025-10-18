@@ -3,6 +3,7 @@ body {
   background: linear-gradient(0deg,rgba(0, 102, 128, 1) 0%, rgba(192, 201, 207, 1) 100%);
 
   font-family: Arial, Helvetica, sans-serif;
+    font-size: 100%;
 }
 
 h1, h2, h3 {
@@ -19,22 +20,50 @@ div {
   padding: 5px;
 }
 
-iframe {
-/*   height: 900px; */
-  height: 3000px;
-  width: 900px;
-  border: none;
-
-  transform: scale(1.2);
-  transform-origin: 0 0;
+ul {
+    list-style-type: none;
+    padding: 0;
 }
 
-hr {
-  border: none;
-  height: 1px;
-  background-color: black;
+.snapshot {
+  padding: 6px;
+}
+
+.not_selected_snapshot {
+  background-color: rgba(192, 201, 207, 1);
+  padding: 5px;
+  border: 1px solid black;
+}
+
+.selected_snapshot {
+  background-color: #006680;
+  padding: 5px;
+  border: 1px solid black;
+}
+
+.snapshot_link {
+  text-decoration: none;
+  color: black;
+}
+
+.selected_snapshot_link {
+  color: white;
+}
+
+#sidebar {
+  width: 250px;
+  float: left;
+  border-right: 1px solid;
 }
 
 #content {
-  border-left: 1px solid;
+/*   border-left: 1px solid; */
+}
+
+#error {
+
+}
+
+.error {
+  color: red;
 }
