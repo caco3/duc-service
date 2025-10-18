@@ -18,12 +18,17 @@ RUN apt-get update -qq \
         libtokyocabinet-dev \
         pkg-config \
         wget \
+        git \
  && rm -rf /var/lib/apt/lists/*
 
 ADD https://github.com/zevv/duc/releases/download/${DUC_VERSION}/duc-${DUC_VERSION}.tar.gz .
 
+COPY *.patch .
+
 RUN tar xzf duc-${DUC_VERSION}.tar.gz \
  && cd duc-${DUC_VERSION} \
+ && git apply ../add-db-to-url.patch \
+ && git apply ../show-html-on-error.patch \
  && ./configure \
  && make \
  && checkinstall --install=no --default \

@@ -1,0 +1,38 @@
+diff --git a/src/duc/cmd-cgi.c b/src/duc/cmd-cgi.c
+index ded0bc5..9eadfdf 100644
+--- a/src/duc/cmd-cgi.c
++++ b/src/duc/cmd-cgi.c
+@@ -500,8 +500,14 @@ static int cgi_main(duc *duc, int argc, char **argv)
+ 
+         r = duc_open(duc, opt_database, DUC_OPEN_RO);
+         if(r != DUC_OK) {
+-		printf("Content-Type: text/plain\n\n");
+-                printf("%s\n", duc_strerror(duc));
++		printf("Content-Type: text/html\n\n");
++		include_file(opt_header);
++		printf("<div id=error><h2 class=error>Error</h2>\n");
++		printf("<p class=error>");
++		printf("%s: ", duc_strerror(duc));
++		print_html(opt_database);
++		printf("</p></div>");
++		include_file(opt_footer);
+ 		return -1;
+         }
+ 
+@@ -510,9 +516,14 @@ static int cgi_main(duc *duc, int argc, char **argv)
+ 	if(path) {
+ 		dir = duc_dir_open(duc, path);
+ 		if(dir == NULL) {
+-			printf("Content-Type: text/plain\n\n");
+-			printf("%s\n", duc_strerror(duc));
++			printf("Content-Type: text/html\n\n");
++			include_file(opt_header);
++			printf("<div id=error><h2 class=error>Error</h2>\n");
++			printf("<p class=error>");
++			printf("%s: ", duc_strerror(duc));
+ 			print_html(path);
++			printf("</p></div>");
++			include_file(opt_footer);
+ 			return -1;
+ 		}
+ 	}
