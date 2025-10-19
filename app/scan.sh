@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+DATABASE="/database/duc_"`date +"%Y-%m-%d_%H-%M-%S".db`
+
 LOG_FILE="${DUC_LOG_FILE:-/var/log/duc.log}"
 LOCK_DIR="/tmp/scan.lock"
 
@@ -10,8 +12,8 @@ if mkdir "$LOCK_DIR" 2>/dev/null; then
     trap 'rm -rf "$LOCK_DIR"' EXIT
 
     {
-        echo "Start of scan: $(date)"
-        /usr/local/bin/duc index --progress /scan
+        echo "Start of scan: $(date) (Database: $DATABASE)"
+        /usr/local/bin/duc index --progress /scan -d $DATABASE
         status=$?
         echo "End of scan: $(date) (exit code: $status)"
         # Propagate exit status of duc from this subshell to pipeline.

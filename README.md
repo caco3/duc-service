@@ -4,6 +4,9 @@
 [![Docker Image Size](https://img.shields.io/docker/image-size/mkoestler/duc-service?sort=date)](https://hub.docker.com/r/mkoestler/duc-service/)
 
 Run [Duc](https://duc.zevv.nl/) in Docker and re-index the file system using a schedule.
+The results can be viewed in a webbrowser:
+
+![Screenshot](Screenshot1.png)
 
 The built docker images can be found on [Docker Hub](https://hub.docker.com/r/mkoestler/duc-service/).
 
@@ -11,6 +14,7 @@ The built docker images can be found on [Docker Hub](https://hub.docker.com/r/mk
 - Included scheduling for automatic scanning
 - Single-command deployment
 - Very small image footprint
+- Web UI to view and manage the snapshots
 
 ## Usage Example
 ```
@@ -54,6 +58,14 @@ docker run -e "SCHEDULE=0 0 * * *" -p 80:80 \
     --mount type=bind,src=/,dst=/scan/root,readonly \
     --mount type=volume,src=duc_database,dst=/database \
     duc-service
+```
+
+Build, tag and publish:
+```
+docker build . --file Dockerfile --tag mkoestler/duc-service:latest
+
+sudo docker login -u mkoestler
+sudo docker push mkoestler/duc-service:latest
 ```
 
 ## References

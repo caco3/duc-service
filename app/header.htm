@@ -1,0 +1,87 @@
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+        console.log("ready");
+        
+        /* Fetch list of databases and fill them into the list */
+        $.ajax("get-databases.cgi", {
+            success: function (data) {
+              // Success callback function
+              console.log(data)
+              
+              /* Delete the last one entry since it is always "0" */
+              data.databases.pop()
+        
+              /* Extract the parameters from the URL */
+              var db = (new URL(location.href)).searchParams.get('db')
+              if (db == null) {
+                console.log("No 'db' parameter in URL, selecting latest DB");
+                db = data.databases[data.databases.length - 1]
+              }                      
+              console.log("Selected DB: " + db)
+              
+              var path = (new URL(location.href)).searchParams.get('path')
+              console.log("Path: " + path)
+              
+              if (path == null) {
+                path = "/scan"
+              }
+
+              list = document.getElementById("databases_list")     
+              
+              /* Iterate through the list */
+              for(let i = 0; i < data.databases.length; i++) {
+                console.log(i, data.databases[i]);
+                let li = document.createElement('li');
+                let arr = data.databases[i].replace("/database/duc_", "").replace(".db", "").replace("_", " ").split(" ")
+                let formated = arr[0] + " " + arr[1].replaceAll("-", ":")
+                
+                let entry_class = "not_selected_snapshot"
+                let a_class = ""
+                if (data.databases[i] == db) {
+                    entry_class = "selected_snapshot"
+                    a_class = "selected_snapshot_link"
+
+                    var formated_path = ""
+                    p = "/"
+                    arr = path.split("/")
+                    arr.shift()
+                    arr.forEach(element => {
+                      console.log("element: " + element);
+                      p = p + element + "/"
+                      formated_path = formated_path + "&nbsp;/&nbsp;" + "<a href=duc.cgi?db=" + db + "&path=" + p + ">" + element + "</a>"
+                    });
+
+                    document.getElementById("content_header_div").innerHTML = "<h2 class=content_header>Snapshot " + 
+                      formated + "</h2><h3 class=content_header>Path: " + formated_path + "</h3>"                    
+                }
+                
+                li.innerHTML = "<span class=" + entry_class + "><a class=\"snapshot_link " + a_class + "\" href=duc.cgi?db=" + data.databases[i] + "&cmd=index&path=" + path + ">" + formated + "</a></span>"
+                li.className = "snapshot"                        
+                list.appendChild(li);
+              }
+              
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+              // Error callback
+              console.log("Error, failed to fetch get-databases.cgi: " + xhr.status + ", " + thrownError + "!");
+              document.getElementById("databases").innerHTML = "Failed to read the list of snapshots!<br>Error: " + xhr.status + ", " + thrownError + "!"
+            },
+        });
+    })
+  </script>
+
+
+  <div id=sidebar>
+      <div style="padding: 0;  margin-bottom: 20px;">
+          <div style="padding: 0;"><a href="/"><img src=logo.png width=70px style="float: left; padding-left: 0"></a></div>
+          <div style="float: none; margin-left: 70px;"><a href="/" style="text-decoration: none"><h1>Storage Analyzer</h1></a></div>
+      </div>
+      <h2 style="margin-bottom: 0; margin-left: 10px;">Snapshots</h2>
+      <div id=databases><ul id="databases_list" style="margin:0"></ul></div>
+      <p>More: <a href=https://github.com/MaximilianKoestler/duc-service target=_blank>github.com/MaximilianKoestler/duc-service</a></p>
+      <p>Based on &nbsp;<a href=https://duc.zevv.nl/ target=_blank alt=Duc><img src=duc.png width=70px style="vertical-align:middle" ></a></p>
+      <p>Icon source: <a href="https://www.flaticon.com/free-icon/storage-space_8110605" title="storage space icons" target=_blank>Storage space icons created by Freepik - Flaticon</a></p>
+  </div>
+  <div id=content_header_div style="float: left; width: 80%"><h2 id=content_header>Snapshot</h2></div>
+  <div id=content style="float: left;">

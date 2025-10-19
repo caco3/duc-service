@@ -11,6 +11,7 @@ ARG DUC_VERSION=1.4.5
 RUN apt-get update -qq \
  && apt-get install -y -qq --no-install-recommends \
         build-essential \
+        git \
         ca-certificates \
         checkinstall \
         curl \
@@ -23,8 +24,12 @@ RUN apt-get update -qq \
 
 ADD https://github.com/zevv/duc/releases/download/${DUC_VERSION}/duc-${DUC_VERSION}.tar.gz .
 
+COPY *.patch .
+
 RUN tar xzf duc-${DUC_VERSION}.tar.gz \
  && cd duc-${DUC_VERSION} \
+ && git apply ../add-db-to-url.patch \
+ && git apply ../show-html-on-error.patch \
  && ./configure \
  && make -j"$(nproc)" \
  && checkinstall --install=no --default \
@@ -65,16 +70,18 @@ RUN dpkg -i /duc.deb \
 COPY app/nginx.conf /etc/nginx/nginx.conf
 COPY app/ducrc /etc/ducrc
 
-COPY app/duc.cgi /var/www/html/duc.cgi
-COPY app/manual_scan.cgi /var/www/html/manual_scan.cgi
-COPY app/log.cgi /var/www/html/log.cgi
+COPY app/*.cgi /var/www/html/
+COPY app/*.png /var/www/html/
+COPY app/*.ico /var/www/html/
+COPY app/*.htm /var/www/html/
+COPY app/*.css /var/www/html/
 
 COPY app/startup.sh /startup.sh
 COPY app/scan.sh /scan.sh
 COPY app/manual_scan.sh /manual_scan.sh
 
 # Default schedule: everyday at midnight
-ENV SCHEDULE 0 0 * * *
+ENV SCHEDULE="0 0 * * *"
 
 EXPOSE 80
 
