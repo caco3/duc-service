@@ -1,14 +1,14 @@
 # Duc-Service
-[![Docker Image Version](https://img.shields.io/docker/v/mkoestler/duc-service)](https://hub.docker.com/r/mkoestler/duc-service/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/mkoestler/duc-service.svg)](https://hub.docker.com/r/mkoestler/duc-service/)
-[![Docker Image Size](https://img.shields.io/docker/image-size/mkoestler/duc-service?sort=date)](https://hub.docker.com/r/mkoestler/duc-service/)
+[![Docker Image Version](https://img.shields.io/docker/v/caco3x/duc-service)](https://hub.docker.com/r/caco3x/duc-service/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/caco3x/duc-service.svg)](https://hub.docker.com/r/caco3x/duc-service/)
+[![Docker Image Size](https://img.shields.io/docker/image-size/caco3x/duc-service?sort=date)](https://hub.docker.com/r/caco3x/duc-service/)
 
 Run [Duc](https://duc.zevv.nl/) in Docker and re-index the file system using a schedule.
 The results can be viewed in a webbrowser:
 
 ![Screenshot](Screenshot1.png)
 
-The built docker images can be found on [Docker Hub](https://hub.docker.com/r/mkoestler/duc-service/).
+The built docker images can be found on [Docker Hub](https://hub.docker.com/r/caco3x/duc-service/).
 
 # Features
 - Included scheduling for automatic scanning
@@ -21,7 +21,7 @@ The built docker images can be found on [Docker Hub](https://hub.docker.com/r/mk
 docker run -e "SCHEDULE=0 0 * * *" -p 80:80 \
     --mount type=bind,src=/,dst=/scan/root,readonly \
     --mount type=volume,src=duc_database,dst=/database \
-    mkoestler/duc-service
+    caco3x/duc-service
 ```
 
 ## Parameters
@@ -62,10 +62,10 @@ docker run -e "SCHEDULE=0 0 * * *" -p 80:80 \
 
 Build, tag and publish:
 ```
-docker build . --file Dockerfile --tag mkoestler/duc-service:latest
+docker build . --file Dockerfile --tag caco3x/duc-service:latest
 
-sudo docker login -u mkoestler
-sudo docker push mkoestler/duc-service:latest
+sudo docker login -u caco3x
+sudo docker push caco3x/duc-service:latest
 ```
 
 ## References

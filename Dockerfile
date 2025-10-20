@@ -44,9 +44,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 ARG BUILD_DATE
 ARG VCS_REF
-LABEL maintainer="Maximilian Köstler <maximilian@koestler.dev>" \
+LABEL maintainer="George Ruinelli <caco3@ruinelli.ch>" \
       org.label-schema.build-date=$BUILD_DATE \
-      org.label-schema.vcs-url="https://github.com/MaximilianKoestler/duc-service.git" \
+      org.label-schema.vcs-url="https://github.com/caco3/duc-service.git" \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.schema-version="1.0.0-rc1"
 
