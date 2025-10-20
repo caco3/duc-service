@@ -7,8 +7,6 @@ services:
     environment:
       # example: everyday at midnight
       - SCHEDULE=0 0 * * *
-      # Set to true if a snapshot should be created on each docker container start
-      - RUN_SCAN_ON_STARTUP=false
     ports:
       # example 80 -> 80
       - target: 80
