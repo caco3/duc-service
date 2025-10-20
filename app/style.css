@@ -19,19 +19,6 @@ body {
    background: linear-gradient(0deg,rgba(0, 102, 128, 1) 0%, rgba(192, 201, 207, 1) 100%);
    min-height: 100vh;
 
- /* background: linear-gradient(90deg, #bfc8ce,  #06b7c7); */
-  
-  /*&:before {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 0;
-		bottom: 0;
-    right: 0;
-		mask-image: linear-gradient(to bottom, transparent, black);
-		background: linear-gradient(90deg, #494d4f, #026781);	
-  }*/
-
   font-family: Arial, Helvetica, sans-serif;
     font-size: 100%;
 }
