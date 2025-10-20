@@ -5,12 +5,16 @@ set -euo pipefail
 LOG_FILE="${DUC_LOG_FILE:-/var/log/duc.log}"
 touch "$LOG_FILE"
 
-echo "Starting initial recursive scan"
-echo "This may take a while..."
-echo "Now: $(date)"
-/scan.sh || echo "Initial scan failed (exit $?)" | tee -a "$LOG_FILE"
-echo "Now: $(date)"
-echo "Scan complete"
+if [[ "$RUN_SCAN_ON_STARTUP" == "true" ]]; then
+	echo "Starting initial recursive scan"
+	echo "This may take a while..."
+	echo "Now: $(date)"
+	/scan.sh || echo "Initial scan failed (exit $?)" | tee -a "$LOG_FILE"
+	echo "Now: $(date)"
+	echo "Scan complete"
+else
+	echo "Skipping initial recursive scan, you can enable it with the RUN_SCAN_ON_STARTUP environment variable"
+fi
 
 # Basic validation for SCHEDULE (5 fields). If invalid, fallback to midnight.
 if ! echo "$SCHEDULE" | awk 'NF==5' >/dev/null 2>&1; then
