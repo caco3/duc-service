@@ -17,10 +17,12 @@
               if (db == null) {
                 console.log("No 'db' parameter in URL, selecting latest DB");
                 db = data.databases[data.databases.length - 1]
-              }                      
+              }
+              db = db.split("?")[0]
               console.log("Selected DB: " + db)
               
               var path = (new URL(location.href)).searchParams.get('path')
+              path = path.split("?")[0]
               console.log("Path: " + path)
               
               if (path == null) {
