@@ -53,16 +53,6 @@ get_latest_db() {
 #echo "Content-type: text/html"; echo
 #echo "URL: $REQUEST_URI<br>"
 
-# If the path variable is not set, no pie chart is shown
-# In such case, redirect to the same URL but append "path=/scan"
-get_PATH_IN_SNAPSHOT "$REQUEST_URI"
-#echo "PATH: $PATH_IN_SNAPSHOT<br>"
-if [[ "$PATH_IN_SNAPSHOT" == "" ]]; then
-    #echo "path parameter is missing or empty!<br>"
-    echo "Content-type: text/html"; echo
-    echo "<meta http-equiv=refresh content=\"0; url=$REQUEST_URI?path=/scan\">"
-fi
-
 get_db "$REQUEST_URI"
 if [[ "$DB" == "" ]]; then
     get_latest_db
@@ -70,5 +60,16 @@ if [[ "$DB" == "" ]]; then
 fi
 #echo "DB: $DB<br>"
 
+# If the path variable is not set, no pie chart is shown
+# In such case, redirect to the same URL but append "path=/scan"
+get_PATH_IN_SNAPSHOT "$REQUEST_URI"
+#echo "PATH: $PATH_IN_SNAPSHOT<br>"
+if [[ "$PATH_IN_SNAPSHOT" == "" ]]; then
+    #echo "path parameter is missing or empty!<br>"
+    echo "Content-type: text/html"; echo
+    echo "<meta http-equiv=refresh content=\"0; url=$REQUEST_URI?db=$DB&path=/scan\">"
+fi
 
-exec duc cgi --database=$DB --dpi=120 --size=600 --list --levels 1 --header header.htm --footer footer.htm --css-url style.css --db-error db-error.htm --path-error path-error.htm
+
+
+exec duc cgi --database=$DB --dpi=120 --size=600 --list --levels 1 --header header.htm --footer footer.htm --css-url style.css --db-error db-error.cgi --path-error path-error.cgi

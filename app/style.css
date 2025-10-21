@@ -91,3 +91,12 @@ ul {
 .error {
   color: red;
 }
+
+.error_message {
+  padding: 5px;
+  background-color: white;
+}
+
+#db_error, #path_error {
+  font-weight: bold;
+}
