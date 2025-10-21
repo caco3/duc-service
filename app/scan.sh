@@ -7,13 +7,18 @@ DATABASE="/database/duc_"`date +"%Y-%m-%d_%H-%M-%S".db`
 LOG_FILE="${DUC_LOG_FILE:-/var/log/duc.log}"
 LOCK_DIR="/tmp/scan.lock"
 
+echo "Excluding files/folders with the following patterns: $EXCLUDE"
+EXCLUDE=`echo $EXCLUDE | sed "s/,/ /g"`
+EXCLUDE=( `for a in ${EXCLUDE[@]}; do echo -n "--exclude $a "; done` )
+
 # Acquire lock atomically using mkdir (portable). If it exists, just exit silently.
 if mkdir "$LOCK_DIR" 2>/dev/null; then
     trap 'rm -rf "$LOCK_DIR"' EXIT
 
     {
         echo "Start of scan: $(date) (Database: $DATABASE)"
-        /usr/local/bin/duc index --progress /scan -d $DATABASE
+        /usr/local/bin/duc index --progress /scan -d $DATABASE --check-hard-links ${EXCLUDE[@]}
+        # --exclude=Selektion --exclude=Speziell --exclude=roms
         status=$?
         echo "End of scan: $(date) (exit code: $status)"
         # Propagate exit status of duc from this subshell to pipeline.
