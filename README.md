@@ -27,7 +27,7 @@ docker compose up --build --detach
 
 ### Without Docker Compose
 ```
-docker run -e "SCHEDULE=0 0 * * *" -e "RUN_SCAN_ON_STARTUP=false" \
+docker run -e "SCHEDULE=0 0 * * *" -e "RUN_SCAN_ON_STARTUP=true" \
     -e "EXCLUDE=proc sys dev run tmp temp usr proc" -p 80:80 \
     --mount type=bind,src=/,dst=/scan/root,readonly \
     --mount type=volume,src=duc_database,dst=/database \

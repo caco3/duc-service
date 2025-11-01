@@ -6,7 +6,7 @@ ARG UBUNTU_VERSION=24.04
 
 FROM ubuntu:${UBUNTU_VERSION} AS build
 
-ARG DUC_VERSION=1.4.5
+ARG DUC_BRANCH=v1.5.0-rc2
 
 RUN apt-get update -qq \
  && apt-get install -y -qq --no-install-recommends \
@@ -20,20 +20,26 @@ RUN apt-get update -qq \
         libpango1.0-dev \
         libtokyocabinet-dev \
         pkg-config \
+        libtkrzw-dev \
+        libarchive-dev \
+        automake \
+        autoconf \
  && rm -rf /var/lib/apt/lists/*
 
-ADD https://github.com/zevv/duc/releases/download/${DUC_VERSION}/duc-${DUC_VERSION}.tar.gz .
+RUN git clone -b $DUC_BRANCH --single-branch https://github.com/zevv/duc
 
-COPY *.patch .
 
-RUN tar xzf duc-${DUC_VERSION}.tar.gz \
- && cd duc-${DUC_VERSION} \
+COPY *.patch ./
+
+RUN cd duc \
  && git apply ../add-db-to-url.patch \
  && git apply ../show-html-on-error.patch \
+ && autoreconf -i \
  && ./configure \
  && make -j"$(nproc)" \
  && checkinstall --install=no --default \
- && cp duc_${DUC_VERSION}-*.deb /duc.deb
+ && cp duc_*.deb /duc.deb
+
 
 ###############################
 # Final image for running Duc #
@@ -63,6 +69,7 @@ RUN dpkg -i /duc.deb \
         libpangocairo-1.0-0 \
         libtokyocabinet9 \
         nginx \
+        libtkrzw1t64 \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /var/www/html/* \
  && mkdir -p /database /scan
