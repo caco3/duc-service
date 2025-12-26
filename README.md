@@ -61,7 +61,7 @@ Now you can edit the files in the `app` folder without having to rebuild/start t
 ### Upload to dockerhub
 Build, tag and publish:
 ```
-docker build . --file Dockerfile --tag caco3x/duc-service:latest
+sudo docker build . --file Dockerfile --tag caco3x/duc-service:latest
 
 sudo docker login -u caco3x
 sudo docker push caco3x/duc-service:latest
