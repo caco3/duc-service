@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+printenv > /etc/environment
+
 LOG_FILE="${DUC_LOG_FILE:-/var/log/duc.log}"
 touch "$LOG_FILE"
 
