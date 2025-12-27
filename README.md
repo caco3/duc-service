@@ -1,13 +1,13 @@
 # Storage Analyzer
-[![Docker Image Version](https://img.shields.io/docker/v/caco3x/Storage-Analyzer)](https://hub.docker.com/r/caco3x/Storage-Analyzer/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/caco3x/Storage-Analyzer.svg)](https://hub.docker.com/r/caco3x/Storage-Analyzer/)
-[![Docker Image Size](https://img.shields.io/docker/image-size/caco3x/Storage-Analyzer?sort=date)](https://hub.docker.com/r/caco3x/Storage-Analyzer/)
+[![Docker Image Version](https://img.shields.io/docker/v/caco3x/storage-analyzer)](https://hub.docker.com/r/caco3x/storage-analyzer/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/caco3x/storage-analyzer.svg)](https://hub.docker.com/r/caco3x/storage-analyzer/)
+[![Docker Image Size](https://img.shields.io/docker/image-size/caco3x/storage-analyzer?sort=date)](https://hub.docker.com/r/caco3x/storage-analyzer/)
 
 This tool uses [Duc](https://duc.zevv.nl/) to provide a generic Storage Analyzer like provided by [Synology](https://www.synology.com/en-us/dsm/packages/StorageAnalyzer) to analyze the storage usage of a system. It's main goal is to to provide a storage usage overview on a NAS, how ever it could also work on any system which provides docker.
 
 ![Screenshot](Screenshot1.png)
 
-The built docker images can be found on [Docker Hub](https://hub.docker.com/r/caco3x/Storage-Analyzer/).
+The built docker images can be found on [Docker Hub](https://hub.docker.com/r/caco3x/storage-analyzer/).
 
 # Features
 - Included scheduling for automatic scanning
@@ -33,7 +33,7 @@ docker run -e "SCHEDULE=0 0 * * *" -e "RUN_SCAN_ON_STARTUP=false" \
     -e "EXCLUDE=proc sys dev run tmp temp usr proc" -p 80:80 \
     --mount type=bind,src=/,dst=/scan/root,readonly \
     --mount type=volume,src=duc_database,dst=/database \
-    caco3x/Storage-Analyzer
+    caco3x/storage-analyzer
 ```
 
 ## Parameters
@@ -63,10 +63,10 @@ Now you can edit the files in the `app` folder without having to rebuild/start t
 ### Upload to dockerhub
 Build, tag and publish:
 ```
-sudo docker build . --file Dockerfile --tag caco3x/Storage-Analyzer:latest
+sudo docker build . --file Dockerfile --tag caco3x/storage-analyzer:latest
 
 sudo docker login -u caco3x
-sudo docker push caco3x/Storage-Analyzer:latest
+sudo docker push caco3x/storage-analyzer:latest
 ```
 
 ## References
