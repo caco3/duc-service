@@ -1,20 +1,22 @@
-# Duc-Service
-[![Docker Image Version](https://img.shields.io/docker/v/caco3x/duc-service)](https://hub.docker.com/r/caco3x/duc-service/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/caco3x/duc-service.svg)](https://hub.docker.com/r/caco3x/duc-service/)
-[![Docker Image Size](https://img.shields.io/docker/image-size/caco3x/duc-service?sort=date)](https://hub.docker.com/r/caco3x/duc-service/)
+# Storage Analyzer
+[![Docker Image Version](https://img.shields.io/docker/v/caco3x/Storage-Analyzer)](https://hub.docker.com/r/caco3x/Storage-Analyzer/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/caco3x/Storage-Analyzer.svg)](https://hub.docker.com/r/caco3x/Storage-Analyzer/)
+[![Docker Image Size](https://img.shields.io/docker/image-size/caco3x/Storage-Analyzer?sort=date)](https://hub.docker.com/r/caco3x/Storage-Analyzer/)
 
-Run [Duc](https://duc.zevv.nl/) in Docker and re-index the file system using a schedule.
-The results can be viewed in a webbrowser:
+This tool uses [Duc](https://duc.zevv.nl/) to provide a generic Storage Analyzer like provided by [Synology](https://www.synology.com/en-us/dsm/packages/StorageAnalyzer) to analyze the storage usage of a system. It's main goal is to to provide a storage usage overview on a NAS, how ever it could also work on any system which provides docker.
 
 ![Screenshot](Screenshot1.png)
 
-The built docker images can be found on [Docker Hub](https://hub.docker.com/r/caco3x/duc-service/).
+The built docker images can be found on [Docker Hub](https://hub.docker.com/r/caco3x/Storage-Analyzer/).
 
 # Features
 - Included scheduling for automatic scanning
 - Single-command deployment
 - Very small image footprint
 - Web UI to view and manage the snapshots
+- Easy navigation through directories and snapshots
+- Manual scan trigger
+- Log output of the last scan
 
 ## Usage Examples
 ### With Docker Compose
@@ -31,7 +33,7 @@ docker run -e "SCHEDULE=0 0 * * *" -e "RUN_SCAN_ON_STARTUP=false" \
     -e "EXCLUDE=proc sys dev run tmp temp usr proc" -p 80:80 \
     --mount type=bind,src=/,dst=/scan/root,readonly \
     --mount type=volume,src=duc_database,dst=/database \
-    caco3x/duc-service
+    caco3x/Storage-Analyzer
 ```
 
 ## Parameters
@@ -61,10 +63,10 @@ Now you can edit the files in the `app` folder without having to rebuild/start t
 ### Upload to dockerhub
 Build, tag and publish:
 ```
-sudo docker build . --file Dockerfile --tag caco3x/duc-service:latest
+sudo docker build . --file Dockerfile --tag caco3x/Storage-Analyzer:latest
 
 sudo docker login -u caco3x
-sudo docker push caco3x/duc-service:latest
+sudo docker push caco3x/Storage-Analyzer:latest
 ```
 
 ## References
